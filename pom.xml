@@ -50,10 +50,6 @@
       <id>development</id>
       <activation>
         <activeByDefault>true</activeByDefault>
-        <property>
-          <name>build</name>
-          <value>development</value>
-        </property>
       </activation>
       <properties>
         <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
@@ -63,12 +59,6 @@
     </profile>
     <profile>
       <id>release</id>
-      <activation>
-        <property>
-          <name>build</name>
-          <value>release</value>
-        </property>
-      </activation>
       <properties>
         <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
         <skip.package.fakeSources>true</skip.package.fakeSources>
@@ -77,12 +67,6 @@
     </profile>
     <profile>
       <id>deploy</id>
-      <activation>
-        <property>
-          <name>build</name>
-          <value>deploy</value>
-        </property>
-      </activation>
       <properties>
         <skip.package.fakeJavadoc>false</skip.package.fakeJavadoc>
         <skip.package.fakeSources>false</skip.package.fakeSources>
