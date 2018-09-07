@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ragedunicorn.tools.maven</groupId>
   <artifactId>maven-code-quality</artifactId>
@@ -40,4 +41,91 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>development</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>build</name>
+          <value>development</value>
+        </property>
+      </activation>
+      <properties>
+        <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
+        <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
+      </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <activation>
+        <property>
+          <name>build</name>
+          <value>release</value>
+        </property>
+      </activation>
+      <properties>
+        <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
+        <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.4.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>package-fake-javadoc</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>${package.javadoc.descriptor}</descriptor>
+              </descriptors>
+              <finalName>${project.artifactId}-${project.version}-javadoc</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+            </configuration>
+          </execution>
+          <execution>
+            <id>package-fake-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>${package.sources.descriptor}</descriptor>
+              </descriptors>
+              <finalName>${project.artifactId}-${project.version}-sources</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
 </project>
