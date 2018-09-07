@@ -40,6 +40,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
+    <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
   </properties>
 
   <profiles>
@@ -53,8 +55,8 @@
         </property>
       </activation>
       <properties>
-        <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
-        <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
+        <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
+        <skip.package.fakeSources>true</skip.package.fakeSources>
       </properties>
     </profile>
     <profile>
@@ -66,6 +68,21 @@
         </property>
       </activation>
       <properties>
+        <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
+        <skip.package.fakeSources>true</skip.package.fakeSources>
+      </properties>
+    </profile>
+    <profile>
+      <id>deploy</id>
+      <activation>
+        <property>
+          <name>build</name>
+          <value>deploy</value>
+        </property>
+      </activation>
+      <properties>
+        <skip.package.fakeJavadoc>false</skip.package.fakeJavadoc>
+        <skip.package.fakeSources>false</skip.package.fakeSources>
         <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
         <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
       </properties>
@@ -112,6 +129,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
+              <skipAssembly>${skip.package.fakeJavadoc}</skipAssembly>
               <descriptors>
                 <descriptor>${package.javadoc.descriptor}</descriptor>
               </descriptors>
@@ -126,6 +144,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
+              <skipAssembly>${skip.package.fakeSources}</skipAssembly>
               <descriptors>
                 <descriptor>${package.sources.descriptor}</descriptor>
               </descriptors>
@@ -137,6 +156,4 @@
       </plugin>
     </plugins>
   </build>
-
-
 </project>
