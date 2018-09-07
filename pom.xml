@@ -133,8 +133,8 @@
               <descriptors>
                 <descriptor>${package.javadoc.descriptor}</descriptor>
               </descriptors>
-              <finalName>${project.artifactId}-${project.version}-javadoc</finalName>
-              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>${project.artifactId}-${project.version}</finalName>
+              <appendAssemblyId>true</appendAssemblyId>
             </configuration>
           </execution>
           <execution>
@@ -148,8 +148,8 @@
               <descriptors>
                 <descriptor>${package.sources.descriptor}</descriptor>
               </descriptors>
-              <finalName>${project.artifactId}-${project.version}-sources</finalName>
-              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>${project.artifactId}-${project.version}</finalName>
+              <appendAssemblyId>true</appendAssemblyId>
             </configuration>
           </execution>
         </executions>
