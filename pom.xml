@@ -4,8 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ragedunicorn.tools.maven</groupId>
   <artifactId>maven-code-quality</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A configuration provider for pmd and checkstyle for use throughout RagedUnicorn projects.</description>
+  <url>https://github.com/RagedUnicorn/rg-maven-code-quality</url>
 
   <licenses>
     <license>
@@ -30,13 +34,30 @@
       <email>michael.wiesendanger@gmail.com</email>
       <url>http://ragedunicorn.com</url>
       <organization>RagedUnicorn</organization>
-      <organizationUrl>http://ragedunicorn.com</organizationUrl>
+      <organizationUrl>https://ragedunicorn.com</organizationUrl>
       <roles>
         <role>developer</role>
       </roles>
       <timezone>Switzerland/Zurich</timezone>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/RagedUnicorn/rg-maven-code-quality.git</connection>
+    <developerConnection>scm:git:ssh://github.com:RagedUnicorn/rg-maven-code-quality.git</developerConnection>
+    <url>https://github.com/RagedUnicorn/rg-maven-code-quality/tree/master</url>
+  </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -127,6 +148,7 @@
               </descriptors>
               <finalName>${project.artifactId}-${project.version}</finalName>
               <appendAssemblyId>true</appendAssemblyId>
+              <attach>true</attach>
             </configuration>
           </execution>
           <execution>
@@ -142,9 +164,21 @@
               </descriptors>
               <finalName>${project.artifactId}-${project.version}</finalName>
               <appendAssemblyId>true</appendAssemblyId>
+              <attach>true</attach>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.8</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+        </configuration>
       </plugin>
     </plugins>
   </build>
