@@ -4,7 +4,7 @@
 
 ## How To Use
 
-This dependency is usually not used as a direct dependency to a project but rather by plugin configurations such as findbugs and checkstyle.
+This dependency is usually not used as a direct dependency to a project but rather by plugin configurations such as pmd and checkstyle.
 
 ### Checkstyle Usage Example
 
@@ -91,37 +91,6 @@ Maven usage
   ...
 </project>
 ```
-
-### FindBugs Usage Example
-
-Maven usage
-
-`mvn findbugs:findbugs`
-
-```xml
-<project>
-  ...
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.5</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.ragedunicorn.tools.maven</groupId>
-            <artifactId>maven-code-quality</artifactId>
-            <version>[version]</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
-  </build>
-  ...
-</project>
-```
-
-**Note**: FindBugs requires that the project was previously built and classes are available in the target folder.
 
 ## Development
 
