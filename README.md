@@ -98,6 +98,22 @@ Maven usage
 
 `mvn clean install`
 
+#### Create a Release
+
+In maven `settings.xml` configure the ossrh account
+
+```
+<server>
+  <id>ossrh</id>
+  <username></username>
+  <password></password>
+</server>
+```
+
+Build and Release 
+
+`mvn clean deploy -P deploy`
+
 #### IntelliJ Run Configurations
 
 The project contains IntelliJ run configurations that can be used for most tasks. Create a folder `runConfigurations` inside the `.idea` folder and copy over all run configurations.
