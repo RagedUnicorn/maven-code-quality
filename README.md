@@ -12,7 +12,9 @@ This dependency is usually not used as a direct dependency to a project but rath
 
 Maven usage
 
-`mvn checkstyle:checkstyle`
+```
+mvn checkstyle:checkstyle
+```
 
 ```xml
 <project>
@@ -54,7 +56,9 @@ Additionally the config and header location properties have to be set in the pro
 
 Maven usage
 
-`mvn pmd:pmd`
+```
+mvn pmd:pmd
+```
 
 ```xml
 <project>
@@ -98,7 +102,9 @@ Maven usage
 
 #### Build Project
 
-`mvn clean install`
+```
+mvn clean install
+```
 
 #### Create a Release
 
@@ -112,9 +118,11 @@ In maven `settings.xml` configure the ossrh account
 </server>
 ```
 
-Build and Release 
+#### Build and Release 
 
-`mvn clean deploy -P deploy`
+```
+mvn clean deploy -P deploy
+```
 
 #### IntelliJ Run Configurations
 
