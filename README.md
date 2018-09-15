@@ -90,6 +90,16 @@ mvn pmd:pmd
            <artifactId>maven-code-quality</artifactId>
            <version>[version]</version>
           </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-vm</artifactId>
+            <version>6.6.0</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-xml</artifactId>
+            <version>6.6.0</version>
+          </dependency>
         </dependencies>
       </plugin>
     </plugins>
