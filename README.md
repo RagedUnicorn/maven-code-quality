@@ -143,6 +143,20 @@ In maven `settings.xml` configure the ossrh account
 mvn clean deploy -P deploy
 ```
 
+#### Move Staging to Release
+
+If `autoReleaseAfterClose` is set to false in the `nexus-staging-maven-plugin` plugin an additional step is required to move the deployment from staging to release.
+
+```
+mvn nexus-staging:release
+```
+
+Or if the deployment didn't workout you can drop the artifact from the staging repository.
+
+```
+mvn nexus-staging:drop
+```
+
 #### IntelliJ Run Configurations
 
 The project contains IntelliJ run configurations that can be used for most tasks. Create a folder `runConfigurations` inside the `.idea` folder and copy over all run configurations.
