@@ -2,6 +2,8 @@
 
 > A maven dependency for providing code quality presets to projects
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.ragedunicorn.tools.maven/maven-code-quality.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ragedunicorn.tools.maven%22%20AND%20a:%22maven-code-quality%22)
+
 ## How To Use
 
 This dependency is usually not used as a direct dependency to a project but rather by plugin configurations such as pmd and checkstyle.
