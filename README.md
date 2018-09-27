@@ -1,4 +1,4 @@
-# rg-maven-code-quality
+# maven-code-quality
 
 > A maven dependency for providing code quality presets to projects
 

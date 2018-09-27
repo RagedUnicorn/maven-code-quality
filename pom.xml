@@ -9,7 +9,7 @@
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A configuration provider for pmd and checkstyle for use throughout RagedUnicorn projects.</description>
-  <url>https://github.com/RagedUnicorn/rg-maven-code-quality</url>
+  <url>https://github.com/RagedUnicorn/maven-code-quality</url>
 
   <licenses>
     <license>
@@ -43,9 +43,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/RagedUnicorn/rg-maven-code-quality.git</connection>
-    <developerConnection>scm:git:ssh://github.com:RagedUnicorn/rg-maven-code-quality.git</developerConnection>
-    <url>https://github.com/RagedUnicorn/rg-maven-code-quality/tree/master</url>
+    <connection>scm:git:git://github.com/RagedUnicorn/maven-code-quality.git</connection>
+    <developerConnection>scm:git:ssh://github.com:RagedUnicorn/maven-code-quality.git</developerConnection>
+    <url>https://github.com/RagedUnicorn/maven-code-quality/tree/master</url>
   </scm>
 
   <distributionManagement>
