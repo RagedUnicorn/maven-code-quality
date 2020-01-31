@@ -8,6 +8,17 @@
 
 This dependency is usually not used as a direct dependency to a project but rather by plugin configurations such as pmd and checkstyle.
 
+## Compatibility
+
+Configurations in this artifact need to match with the used checkstyle and pmd version.
+
+Supported Versions:
+
+|            |       |
+|------------|-------|
+| Checkstyle | 8.29  |
+| PMD        | 6.6.0 |
+
 ### Checkstyle Usage Example
 
 Maven usage
