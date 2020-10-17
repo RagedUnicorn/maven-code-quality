@@ -17,7 +17,7 @@ Supported Versions:
 |            |       |
 |------------|-------|
 | Checkstyle | 8.29  |
-| PMD        | 6.6.0 |
+| PMD        | 6.21.0 |
 
 ### Checkstyle Usage Example
 
