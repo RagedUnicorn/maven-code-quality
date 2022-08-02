@@ -127,6 +127,13 @@
     </profile>
     <profile>
       <id>release-github</id>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub RagedUnicorn Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/ragedunicorn/maven-code-quality</url>
+        </repository>
+      </distributionManagement>
       <properties>
         <skip.sign.gpg>true</skip.sign.gpg>
         <skip.package.javadoc>true</skip.package.javadoc>
