@@ -48,22 +48,12 @@
     <url>https://github.com/RagedUnicorn/maven-code-quality/tree/master</url>
   </scm>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-    </repository>
-  </distributionManagement>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <gpg.keyname>488C9072D9E5426B</gpg.keyname>
     <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
     <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
+    <skip.deploy>true</skip.deploy>
   </properties>
 
   <profiles>
@@ -73,28 +63,99 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
-        <skip.package.fakeSources>true</skip.package.fakeSources>
         <skip.sign.gpg>true</skip.sign.gpg>
+        <skip.package.javadoc>true</skip.package.javadoc>
+        <skip.package.sources>true</skip.package.sources>
+        <skip.deploy>true</skip.deploy>
       </properties>
     </profile>
     <profile>
-      <id>release</id>
+      <id>release-ossrh-package</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <name>Sonatype Apache Maven Snapshots Packages</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <name>Sonatype Apache Maven Packages</name>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+      </distributionManagement>
       <properties>
-        <skip.package.fakeJavadoc>true</skip.package.fakeJavadoc>
-        <skip.package.fakeSources>true</skip.package.fakeSources>
-        <skip.sign.gpg>true</skip.sign.gpg>
-      </properties>
-    </profile>
-    <profile>
-      <id>deploy</id>
-      <properties>
-        <skip.package.fakeJavadoc>false</skip.package.fakeJavadoc>
-        <skip.package.fakeSources>false</skip.package.fakeSources>
         <skip.sign.gpg>false</skip.sign.gpg>
-        <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
-        <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
+        <skip.package.javadoc>false</skip.package.javadoc>
+        <skip.package.sources>false</skip.package.sources>
+        <skip.deploy>true</skip.deploy>
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>release-github-package</id>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub RagedUnicorn Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/ragedunicorn/maven-code-quality</url>
+        </repository>
+      </distributionManagement>
+      <properties>
+        <skip.sign.gpg>true</skip.sign.gpg>
+        <skip.package.javadoc>false</skip.package.javadoc>
+        <skip.package.sources>false</skip.package.sources>
+        <skip.deploy>false</skip.deploy>
+      </properties>
+    </profile>
+    <profile>
+      <id>release-github</id>
+      <properties>
+        <skip.sign.gpg>true</skip.sign.gpg>
+        <skip.package.javadoc>true</skip.package.javadoc>
+        <skip.package.sources>true</skip.package.sources>
+        <skip.deploy>true</skip.deploy>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.ragedunicorn.tools.maven</groupId>
+            <artifactId>github-release-maven-plugin</artifactId>
+            <version>1.0.4</version>
+            <executions>
+              <execution>
+                <id>default-cli</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>github-release</goal>
+                </goals>
+                <configuration>
+                  <owner>ragedunicorn</owner>
+                  <repository>maven-code-quality</repository>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <authToken>${github.auth-token}</authToken>
+                  <tagName>v${project.version}</tagName>
+                  <name>v${project.version}</name>
+                  <releaseNotes>src/main/resources/release-notes.md</releaseNotes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
@@ -123,9 +184,11 @@
               <goal>sign</goal>
             </goals>
             <configuration>
+              <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
               <skip>${skip.sign.gpg}</skip>
-              <keyname>${gpg.keyname}</keyname>
-              <passphraseServerId>${gpg.keyname}</passphraseServerId>
             </configuration>
           </execution>
         </executions>
@@ -168,17 +231,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.8</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>false</autoReleaseAfterClose>
-        </configuration>
       </plugin>
     </plugins>
   </build>

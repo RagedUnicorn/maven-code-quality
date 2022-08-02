@@ -138,39 +138,22 @@ mvn clean install
 
 #### Create a Release
 
-In maven `settings.xml` configure the ossrh account
+This project has GitHub action profiles for different Devops related work such as deployments to different places. See .github folder for details.
+The project is deployed to three different places. Each deployment has its own Maven profile for configuration.
 
-```
-<server>
-  <id>ossrh</id>
-  <username></username>
-  <password></password>
-</server>
-```
+##### GitHub Release
 
-#### Build and Release 
+`.github/workflows/github_release.yaml` - Creates a tag and release on GitHub
 
-```
-mvn clean deploy -P deploy
-```
+##### GitHub Package Release
 
-#### Move Staging to Release
+`.github/workflows/github_package_release.yaml` - Releases a package on GitHub
 
-If `autoReleaseAfterClose` is set to false in the `nexus-staging-maven-plugin` plugin an additional step is required to move the deployment from staging to release.
+##### OSSRH Package Release
 
-```
-mvn nexus-staging:release
-```
+`.github/workflows/ossrh_package_release.yaml` - Releases a package on OSSRH (Sonatype)
 
-Or if the deployment didn't workout you can drop the artifact from the staging repository.
-
-```
-mvn nexus-staging:drop
-```
-
-#### IntelliJ Run Configurations
-
-The project contains IntelliJ run configurations that can be used for most tasks. Create a folder `runConfigurations` inside the `.idea` folder and copy over all run configurations.
+All steps are required to make a full release of the plugin but can be done independently of each other. The workflows have to be manually invoked on GitHub.
 
 ## License
 
