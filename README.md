@@ -2,7 +2,8 @@
 
 > A maven dependency for providing code quality presets to projects
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.ragedunicorn.tools.maven/maven-code-quality.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ragedunicorn.tools.maven%22%20AND%20a:%22maven-code-quality%22)
+[![Maven Central](https://img.shields.io/maven-central/v/com.ragedunicorn.tools.maven/maven-code-quality?label=Maven%20Central)](https://central.sonatype.com/artifact/com.ragedunicorn.tools.maven/maven-code-quality)
+[![Renovate enabled](docs/renovate-badge.svg)](https://renovatebot.com)
 
 ## How To Use
 
@@ -14,9 +15,10 @@ Configurations in this artifact need to match with the used checkstyle and pmd v
 
 Supported Versions:
 
-|            |       |
-|------------|-------|
-| Checkstyle | 8.29  |
+|            |        |
+|------------|--------|
+| Java       | 11+    |
+| Checkstyle | 8.29   |
 | PMD        | 6.21.0 |
 
 ### Checkstyle Usage Example
@@ -44,7 +46,7 @@ mvn checkstyle:checkstyle
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.12</version>
+            <version>8.29</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -63,7 +65,7 @@ mvn checkstyle:checkstyle
 </project>
 ```
 
-Additionally the config and header location properties have to be set in the project pom. 
+Additionally, the config and header location properties have to be set in the project pom. 
 
 ```xml
 <properties>
@@ -104,12 +106,12 @@ mvn pmd:pmd
           <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-vm</artifactId>
-            <version>6.6.0</version>
+            <version>6.21.0</version>
           </dependency>
           <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-xml</artifactId>
-            <version>6.6.0</version>
+            <version>6.21.0</version>
           </dependency>
         </dependencies>
       </plugin>
