@@ -32,14 +32,6 @@
       ],
       "groupName": "github actions",
       "description": "Group all GitHub Actions updates"
-    },
-    {
-      "matchDepTypes": [
-        "devDependencies"
-      ],
-      "automerge": true,
-      "automergeType": "pr",
-      "description": "Automerge dev dependencies"
     }
   ],
   "maven": {
