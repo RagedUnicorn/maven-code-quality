@@ -54,7 +54,6 @@
     <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
     <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
     <skip.deploy>true</skip.deploy>
-    <skip.assembly>false</skip.assembly>
   </properties>
 
   <profiles>
@@ -68,7 +67,6 @@
         <skip.package.javadoc>true</skip.package.javadoc>
         <skip.package.sources>true</skip.package.sources>
         <skip.deploy>true</skip.deploy>
-        <skip.assembly>false</skip.assembly>
       </properties>
     </profile>
     <profile>
@@ -90,7 +88,6 @@
         <skip.package.javadoc>false</skip.package.javadoc>
         <skip.package.sources>false</skip.package.sources>
         <skip.deploy>true</skip.deploy>
-        <skip.assembly>false</skip.assembly>
       </properties>
       <build>
         <plugins>
@@ -122,24 +119,15 @@
         <skip.package.javadoc>false</skip.package.javadoc>
         <skip.package.sources>false</skip.package.sources>
         <skip.deploy>false</skip.deploy>
-        <skip.assembly>false</skip.assembly>
       </properties>
     </profile>
     <profile>
       <id>release-github</id>
-      <distributionManagement>
-        <repository>
-          <id>github</id>
-          <name>GitHub RagedUnicorn Apache Maven Packages</name>
-          <url>https://maven.pkg.github.com/ragedunicorn/maven-code-quality</url>
-        </repository>
-      </distributionManagement>
       <properties>
         <skip.sign.gpg>true</skip.sign.gpg>
         <skip.package.javadoc>true</skip.package.javadoc>
         <skip.package.sources>true</skip.package.sources>
         <skip.deploy>true</skip.deploy>
-        <skip.assembly>true</skip.assembly>
       </properties>
       <build>
         <plugins>
@@ -186,6 +174,14 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.1.4</version>
+        <configuration>
+          <skip>${skip.deploy}</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <version>3.2.8</version>
         <executions>
@@ -209,9 +205,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.8.0</version>
-        <configuration>
-          <skipAssembly>${skip.assembly}</skipAssembly>
-        </configuration>
         <executions>
           <execution>
             <id>package-fake-javadoc</id>
