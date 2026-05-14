@@ -1,10 +1,10 @@
-name: OSSRH Package Release
+name: Maven Central Package Release
 on: [workflow_dispatch]
 
 jobs:
-  ossrh-package-release-job:
+  central-package-release-job:
     runs-on: ubuntu-latest
-    name: OSSRH Package Release
+    name: Maven Central Package Release
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -14,9 +14,9 @@ jobs:
           java-version: 11
           distribution: temurin
           cache: maven
-          server-id: ossrh
-          server-username: SONATYPE_USERNAME
-          server-password: SONATYPE_PASSWORD
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_PASSWORD
       - name: Cache Local Maven Repository
         uses: actions/cache@v5
         with:
@@ -25,16 +25,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Install GPG Secret Key
+        env:
+          GPG_SECRET_KEY: ${{ secrets.CENTRAL_GPG_SECRET_KEY }}
         run: |
-          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          echo "$GPG_SECRET_KEY" | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
-      - name: Publish Package to OSSRH
+      - name: Publish Package to Maven Central
+        env:
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.CENTRAL_GPG_SECRET_KEY_PASSWORD }}
         run: |
           mvn --batch-mode --no-transfer-progress \
           deploy \
-          -P release-ossrh-package \
-          -D gpg.passphrase=$OSSRH_GPG_SECRET_KEY_PASSWORD
-        env:
-          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+          -P release-central-package
