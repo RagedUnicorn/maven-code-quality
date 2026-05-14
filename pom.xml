@@ -220,7 +220,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <skipAssembly>${skip.package.fakeJavadoc}</skipAssembly>
+              <skipAssembly>${skip.package.javadoc}</skipAssembly>
               <descriptors>
                 <descriptor>${package.javadoc.descriptor}</descriptor>
               </descriptors>
@@ -236,7 +236,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <skipAssembly>${skip.package.fakeSources}</skipAssembly>
+              <skipAssembly>${skip.package.sources}</skipAssembly>
               <descriptors>
                 <descriptor>${package.sources.descriptor}</descriptor>
               </descriptors>
