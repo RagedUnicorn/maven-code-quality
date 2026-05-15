@@ -2,9 +2,12 @@
   <configuration default="false" name="main[test]" type="JUnit" factoryName="JUnit">
     <module name="maven-code-quality" />
     <option name="PACKAGE_NAME" value="com.ragedunicorn.tools.maven" />
-    <option name="MAIN_CLASS_NAME" value="com.ragedunicorn.tools.maven.RulesetLoadabilityTest" />
+    <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
-    <option name="TEST_OBJECT" value="class" />
+    <option name="TEST_OBJECT" value="pattern" />
+    <patterns>
+      <pattern testClass="com.ragedunicorn.tools.maven.*" />
+    </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
