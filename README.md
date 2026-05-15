@@ -19,7 +19,13 @@ Supported Versions:
 |------------|--------|
 | Java       | 11+    |
 | Checkstyle | 8.29   |
-| PMD        | 6.21.0 |
+| PMD        | 7.24.0 |
+
+> **Breaking changes in 2.0.0**
+> - PMD 7.0+ is now required. Earlier PMD versions cannot parse the new ruleset.
+> - `maven-pmd-plugin` **3.22.0 or newer** is required. Older versions still ship PMD 6 and cannot load this ruleset.
+> - JSP, Velocity, XML, and XSL rules have been **removed**. The ruleset is now Java-only.
+> - Many rule names changed in PMD 7. If your code uses `@SuppressWarnings("PMD.OldName")`, see the [PMD 7 migration guide](https://docs.pmd-code.org/latest/pmd_release_notes_pmd7.html#removed-rules) for the full rename mapping.
 
 ### Checkstyle Usage Example
 
@@ -90,7 +96,7 @@ mvn pmd:pmd
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.10.0</version>
+        <version>3.22.0</version>
         <configuration>
           <rulesets>
             <ruleset>pmd-ruleset.xml</ruleset>
@@ -99,19 +105,9 @@ mvn pmd:pmd
         </configuration>
         <dependencies>
           <dependency>
-           <groupId>com.ragedunicorn.tools.maven</groupId>
-           <artifactId>maven-code-quality</artifactId>
-           <version>[version]</version>
-          </dependency>
-          <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-vm</artifactId>
-            <version>6.21.0</version>
-          </dependency>
-          <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-xml</artifactId>
-            <version>6.21.0</version>
+            <groupId>com.ragedunicorn.tools.maven</groupId>
+            <artifactId>maven-code-quality</artifactId>
+            <version>[version]</version>
           </dependency>
         </dependencies>
       </plugin>
