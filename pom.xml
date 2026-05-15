@@ -50,11 +50,36 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <pmd.version>7.24.0</pmd.version>
+    <junit.version>5.11.4</junit.version>
     <gpg.keyname>773155C3B58BAEA8FB2D061686B59970BEF60526</gpg.keyname>
     <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
     <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
     <skip.deploy>true</skip.deploy>
   </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd-core</artifactId>
+      <version>${pmd.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd-java</artifactId>
+      <version>${pmd.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
   <profiles>
     <profile>
@@ -149,6 +174,11 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
