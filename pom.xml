@@ -54,7 +54,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <pmd.version>7.24.0</pmd.version>
     <checkstyle.version>13.4.2</checkstyle.version>
-    <junit.version>5.14.4</junit.version>
+    <junit.version>6.0.3</junit.version>
     <gpg.keyname>773155C3B58BAEA8FB2D061686B59970BEF60526</gpg.keyname>
     <package.javadoc.descriptor>${basedir}/src/main/resources/assembly-fake-javadoc.xml</package.javadoc.descriptor>
     <package.sources.descriptor>${basedir}/src/main/resources/assembly-fake-sources.xml</package.sources.descriptor>
