@@ -52,7 +52,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-    <pmd.version>7.24.0</pmd.version>
+    <pmd.version>7.26.0</pmd.version>
     <checkstyle.version>13.8.0</checkstyle.version>
     <junit.version>6.1.2</junit.version>
     <gpg.keyname>773155C3B58BAEA8FB2D061686B59970BEF60526</gpg.keyname>
