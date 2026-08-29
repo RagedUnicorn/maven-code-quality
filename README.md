@@ -1,5 +1,7 @@
 # maven-code-quality
 
+![maven-code-quality](docs/maven_code_quality_banner.svg)
+
 > A maven dependency for providing code quality presets to projects
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.ragedunicorn.tools.maven/maven-code-quality?label=Maven%20Central)](https://central.sonatype.com/artifact/com.ragedunicorn.tools.maven/maven-code-quality)
