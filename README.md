@@ -5,7 +5,7 @@
 > A maven dependency for providing code quality presets to projects
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.ragedunicorn.tools.maven/maven-code-quality?label=Maven%20Central)](https://central.sonatype.com/artifact/com.ragedunicorn.tools.maven/maven-code-quality)
-[![Renovate enabled](docs/renovate-badge.svg)](https://renovatebot.com)
+[![Renovate enabled](docs/renovate_badge.svg)](https://renovatebot.com)
 
 ## How To Use
 
